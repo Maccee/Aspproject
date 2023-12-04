@@ -24,7 +24,7 @@ app.MapGet("/lol", () =>
         
     return forecast;
 })
-.WithName("GetWeatherForecast")
+.WithName("lol")
 .WithOpenApi();
 
 app.Run();
