@@ -1,9 +1,12 @@
+using webapi.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddControllersWithViews(); // Add this line to include MVC services
+builder.Services.AddDbContext<AspProjectDatabaseContext>();
 
 var app = builder.Build();
 
@@ -16,16 +19,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthorization();
 
-
-app.MapGet("/lol", () =>
-{
-    var forecast =  "lol";
-        
-    return forecast;
-})
-.WithName("lol")
-.WithOpenApi();
+app.MapControllers(); // Map controller routes
 
 app.Run();
-
